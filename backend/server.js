@@ -2,6 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Sequelize, DataTypes } from "sequelize";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -17,6 +22,10 @@ if (!DATABASE_URL) {
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: "postgres",
   logging: false,
+  dialectOptions:
+    process.env.NODE_ENV === "production"
+      ? { ssl: { require: true, rejectUnauthorized: false } }
+      : {},
 });
 
 app.use(cors());
@@ -38,7 +47,7 @@ const Reservation = sequelize.define(
     notes: { type: DataTypes.TEXT, allowNull: true },
   },
   {
-    timestamps: true, // createdAt / updatedAt
+    timestamps: true,
     tableName: "reservations",
   }
 );
@@ -91,7 +100,7 @@ async function start() {
     await sequelize.sync(); // erstellt Tabelle falls fehlt
     app.listen(PORT, () => console.log(`✅ Backend läuft auf http://localhost:${PORT}`));
   } catch (err) {
-    console.error("Fehler beim Starten:", err);
+    console.error("Fehler beim Starten:", err.message || err);
     process.exit(1);
   }
 }
