@@ -1,0 +1,42 @@
+body {
+  font-family: 'Playfair Display', Georgia, serif;
+  background: #1a0f0f;
+  color: #e8e1e1;
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: #2a1818;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3d2424;
+}
+
+button {
+  background: #8B0000;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input, select, textarea {
+  background: #382222;
+  border: 1px solid #4a2c2c;
+  color: #e8e1e1;
+  padding: 0.8rem;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
